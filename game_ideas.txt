@@ -1,7 +1,10 @@
+Not the best choices due to state size:
 Hex
+Ming Mang
 Chomp
+
+Choices to look into more:
+Ploy
+Mlynek / Grinder / Nine Men of Morris
 Toot-and-Otto
 High Jump
-Ming Mang
-Ploy
-Mlynek / Grinder
