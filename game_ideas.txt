@@ -1,10 +1,8 @@
-Not the best choices due to state size:
-Hex
-Ming Mang
-Chomp
 
-Choices to look into more:
-Ploy
-Mlynek / Grinder / Nine Men of Morris
-Toot-and-Otto
-High Jump
+Ploy:
+
+Mlynek / Grinder / Nine Men of Morris: 
+
+Toot-and-Otto: connect four variant, 4x6 board, very loose upper bound of 3^24*2^7, depth for solved game is 
+
+High Jump: checkers variant, 5x5 board, loose upper bound for state space is 3^25, depth is unbounded because it is loopy
