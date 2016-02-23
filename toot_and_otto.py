@@ -1,7 +1,9 @@
 #Toot and Otto game implementation for Gamescrafters
-#Andrew Reardon
 
-#defines the state object which 
+#defines the state object for the toot and otto game
+#state keeps track of 4 things:
+#the player whose turn it is, the board, and both players hands
+#additional methods are helper methods for the neccessary solver functions and 
 class State(object):
 	"""Base State class"""
 	dash = "-"
@@ -36,6 +38,7 @@ class State(object):
 		copy.hand2 = self.hand2.copy()
 		return copy
 
+	#prints the current board with helpful indices on the left and the bottom
 	def printBoard(self):
 		y = State.boardDimensionHeight - 1
 		while y >= 0:
@@ -141,7 +144,6 @@ def gen_moves(state):
 	for x in range(State.boardDimensionLength):
 		y = 0
 		while not state.pieces[(x,y)] == State.dash and y < State.boardDimensionHeight:
-			print 'in loop'
 			y += 1
 		if y < State.boardDimensionHeight:
 			for piece in hand:
@@ -166,3 +168,21 @@ def make_move(state, action):
 	return successor
 
 init_pos = State()
+
+
+
+
+
+
+#helpful prints for reference and debugging
+print 'the initial position is the following:'
+init_pos.printBoard()
+possibleActions = gen_moves(init_pos)
+print 'these are the possible actions:'
+print possibleActions
+s = make_move(init_pos, possibleActions[6])
+print 'this is the state after a move has been made'
+s.printBoard()
+print 'hand1=' + str(s.hand1)
+print 'hand2=' + str(s.hand2)
+
