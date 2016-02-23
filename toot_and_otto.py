@@ -57,17 +57,6 @@ class State(object):
 			bottomLine += str(x) + " "
 		print(bottomLine)
 
-	def getEmptySquares(self):
-		emptySquares = []
-		for x in range(State.boardDimensionLength):
-			for y in range(State.boardDimensionHeight):
-				if self.pieces[(x,y)] == State.dash:
-					emptySquares.append((x,y))
-		return emptySquares
-
-	def getNumEmptySquares(self):
-		return len(self.getEmptySquares())
-
 	def board_is_full(self):
 		for x in range(State.boardDimensionLength):
 			for y in range(State.boardDimensionHeight):
@@ -128,7 +117,7 @@ def primitive(state):
 		if state.board_is_full():
 			return 'tie'
 		else:
-			return 'unkwown'
+			return 'unknown'
 
 #action is defined as a tuple with the letter, and a board location
 #example of an action: ("T", (2,3))
@@ -172,17 +161,28 @@ init_pos = State()
 
 
 
+#helpful prints for reference, understanding the code, and debugging
+def example():
+	print 'the initial position is the following:'
+	init_pos.printBoard()
+	print 'hand1=' + str(init_pos.hand1)
+	print 'hand2=' + str(init_pos.hand2)
+	print 'firstPlayerTurn=' + str(init_pos.firstPlayerTurn)
+	possibleActions = gen_moves(init_pos)
+	print 'these are the possible actions:'
+	print possibleActions
+	print 'primitive value:'
+	print primitive(init_pos)
 
-
-#helpful prints for reference and debugging
-print 'the initial position is the following:'
-init_pos.printBoard()
-possibleActions = gen_moves(init_pos)
-print 'these are the possible actions:'
-print possibleActions
-s = make_move(init_pos, possibleActions[6])
-print 'this is the state after a move has been made'
-s.printBoard()
-print 'hand1=' + str(s.hand1)
-print 'hand2=' + str(s.hand2)
+	s = make_move(init_pos, possibleActions[6])
+	print 'this is the state after a move has been made'
+	s.printBoard()
+	print 'hand1=' + str(s.hand1)
+	print 'hand2=' + str(s.hand2)
+	print 'firstPlayerTurn=' + str(s.firstPlayerTurn)
+	possibleActions = gen_moves(s)
+	print 'New possible actions:'
+	print possibleActions
+	print 'primitive value:'
+	print primitive(s)
 
