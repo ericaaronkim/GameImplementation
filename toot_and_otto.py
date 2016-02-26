@@ -101,6 +101,7 @@ class State(object):
 
 #Implementation of the neccessary functions for the solver
 
+#assumes that player1 goes for toot and player2 goes for otto
 
 #assumes that if the score is tied, continue playing no matter how many matches
 #takes in a state parameter which is a State object
@@ -109,10 +110,14 @@ def primitive(state):
 	score = state.checkForWords()
 	if score[State.toot] > score[State.otto]:
 		print("toot wins")
-		return 'win'
+		if state.firstPlayerTurn:
+			return 'win'
+		return 'loss'
 	elif score[State.toot] < score[State.otto]:
 		print("otto wins")
-		return 'loss'
+		if state.firstPlayerTurn:
+			return 'loss'
+		return 'win'
 	else:
 		if state.board_is_full():
 			return 'tie'
