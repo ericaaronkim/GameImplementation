@@ -3,7 +3,7 @@
 #defines the state object for the toot and otto game
 #state keeps track of 4 things:
 #the player whose turn it is, the board, and both players hands
-#additional methods are helper methods for the neccessary solver functions and 
+#additional methods are helper methods for the neccessary solver functions and
 class State(object):
 	"""Base State class"""
 	dash = "-"
@@ -12,7 +12,7 @@ class State(object):
 	toot = T+O+O+T
 	otto = O+T+T+O
 	boardDimensionHeight = 4
-	boardDimensionLength = 6
+	boardDimensionLength = 4
 	diagonalConnectionsAllowed = True
 
 	def __init__(self):
@@ -89,8 +89,8 @@ class State(object):
 					if self.wordTest(x+1, y-1, word, 1, -1, 1):
 						score[word] += 1
 		return score
-			
-	#helper function for checkForWords		
+
+	#helper function for checkForWords
 	def wordTest(self, x, y, word, dx, dy, char_pos_in_word):
 		if char_pos_in_word >= 4:
 			return True
@@ -149,7 +149,7 @@ def gen_moves(state):
 #the parameter action is a tuple with the letter, and a board location
 #the parameter state is a State object
 #must pass in a valid state and a valid action for that state, does not check
-def make_move(state, action):
+def do_move(state, action):
 	successor = state.stateCopy()
 	piece, loc = action
 
@@ -167,6 +167,7 @@ init_pos = State()
 
 
 #helpful prints for reference, understanding the code, and debugging
+"""
 def example():
 	print 'the initial position is the following:'
 	init_pos.printBoard()
@@ -190,4 +191,4 @@ def example():
 	print possibleActions
 	print 'primitive value:'
 	print primitive(s)
-
+"""
