@@ -27,7 +27,7 @@ class State(object):
         self.hand2O = 6
 
     #returns a new State object that is a copy of self
-    def stateCopy(self):
+    def state_copy(self):
         copy = State()
         copy.firstPlayerTurn = self.firstPlayerTurn
         copy.pieces = self.pieces.copy()
@@ -38,7 +38,7 @@ class State(object):
         return copy
 
     #prints the current board with helpful indices on the left and the bottom
-    def printBoard(self):
+    def print_board(self):
         """ Currently just printing the numpy array. """
         for i in range(self.boardDimensionHeight):
             print self.pieces[i]
@@ -50,7 +50,7 @@ class State(object):
         return bool_pieces.sum() == 0
 
     #returns the score dictionary for the number of words, toot and otto
-    def checkForWords(self):
+    def check_for_words(self):
         # first entry is number of toot's, second is otto's
         score = np.zeros(2, dtype = int)
         for x in range(self.boardDimensionHeight):
@@ -77,7 +77,7 @@ class State(object):
         return score
             
     #helper function for checkForWords      
-    def wordTest(self, x, y, word, dx, dy, char_pos_in_word):
+    def word_test(self, x, y, word, dx, dy, char_pos_in_word):
         if char_pos_in_word == 4:
             return True
         if x >= self.boardDimensionHeight or y >= self.boardDimensionLength or x < 0 or y < 0:
