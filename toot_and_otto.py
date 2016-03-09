@@ -91,9 +91,12 @@ class State(object):
 
 #assumes that player1 goes for toot and player2 goes for otto
 
+initial_pos = State()
+
 #assumes that if the score is tied, continue playing no matter how many matches
 #takes in a state parameter which is a State object
 #returns a string of the options win, loss, tie, draw, unkwown
+
 def primitive(state):
     score = state.checkForWords()
     if score[1] >= 1 and score [0] >= 1:
@@ -138,7 +141,7 @@ def gen_moves(state):
 #the parameter action is a tuple with the letter, and a board location
 #the parameter state is a State object
 #must pass in a valid state and a valid action for that state, does not check
-def make_move(state, action):
+def do_move(state, action):
     successor = state.stateCopy()
     piece, loc = action
 
@@ -157,7 +160,7 @@ def make_move(state, action):
 
 
 
-init_pos = State()
+
 
 #helpful prints for reference, understanding the code, and debugging
 def example():
