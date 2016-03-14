@@ -7,6 +7,7 @@ LOSS, WIN, TIE, DRAW, UNDECIDED = "LOSS", "WIN", "TIE", "DRAW", "UNDECIDED"
 class Solver:
     solved = False
     known_states = {}
+
     @staticmethod
     def solve():
         root = GameTree(game_module.initial_position)
@@ -17,14 +18,16 @@ class Solver:
             next_states = []
             for m in moves:
                 next = GameTree(game_module.do_move(node.data, m))
-                next.parent = node
+                next.parents.add(node)
                 next_states.append(next)
             node.children = next_states
-            if (game_module.primitive(node.data) != UNDECIDED or node.data in Solver.known_states):
+
+            if node.data in Solver.known_states or game_module.primitive(node.data) != UNDECIDED:
                 Solver.record(node)
             else:
                 for c in node.children:
                     queue.append(c)
+                    
         if (game_module.initial_position in Solver.known_states):
             if Solver.known_states[game_module.initial_position] == WIN:
                 print("Winning position")
@@ -59,7 +62,7 @@ class Solver:
 class GameTree:
     def __init__(self, data):
         self.data = data
-        self.parent = None
+        self.parents = set()
         self.children = []
 
 Solver.solve()

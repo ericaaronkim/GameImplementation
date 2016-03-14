@@ -1,4 +1,8 @@
+import gamesman
 #Toot and Otto game implementation for Gamescrafters
+
+LOSS, WIN, TIE, DRAW, UNDECIDED = "LOSS", "WIN", "TIE", "DRAW", "UNDECIDED"
+
 
 #defines the state object for the toot and otto game
 #state keeps track of 4 things:
@@ -11,7 +15,7 @@ class State(object):
 	O = "O"
 	toot = T+O+O+T
 	otto = O+T+T+O
-	boardDimensionHeight = 4
+	boardDimensionHeight = 2
 	boardDimensionLength = 4
 	diagonalConnectionsAllowed = True
 
@@ -109,27 +113,25 @@ class State(object):
 def primitive(state):
 	score = state.checkForWords()
 	if score[State.toot] > score[State.otto]:
-		print("toot wins")
 		if state.firstPlayerTurn:
-			return 'win'
-		return 'loss'
+			return gamesman.WIN
+		return gamesman.LOSE
 	elif score[State.toot] < score[State.otto]:
-		print("otto wins")
 		if state.firstPlayerTurn:
-			return 'loss'
-		return 'win'
+			return gamesman.LOSE
+		return gamesman.WIN
 	else:
 		if state.board_is_full():
-			return 'tie'
+			return gamesman.TIE
 		else:
-			return 'unknown'
+			return gamesman.UNDECIDED
 
 #action is defined as a tuple with the letter, and a board location
 #example of an action: ("T", (2,3))
 
 #takes in the parameter state, a State object
 #returns a list of actions that are valid to be applied to the parameter state
-def gen_moves(state):
+def generateMoves(state):
 	hand = state.hand2
 	if state.firstPlayerTurn:
 		hand = state.hand1
@@ -137,7 +139,7 @@ def gen_moves(state):
 	possibleActions = []
 	for x in range(State.boardDimensionLength):
 		y = 0
-		while not state.pieces[(x,y)] == State.dash and y < State.boardDimensionHeight:
+		while y < State.boardDimensionHeight and not state.pieces[(x,y)] == State.dash:
 			y += 1
 		if y < State.boardDimensionHeight:
 			for piece in hand:
@@ -149,7 +151,7 @@ def gen_moves(state):
 #the parameter action is a tuple with the letter, and a board location
 #the parameter state is a State object
 #must pass in a valid state and a valid action for that state, does not check
-def do_move(state, action):
+def doMove(state, action):
 	successor = state.stateCopy()
 	piece, loc = action
 
@@ -161,7 +163,7 @@ def do_move(state, action):
 		successor.hand2[piece] -= 1
 	return successor
 
-init_pos = State()
+initialPosition = State()
 
 
 
