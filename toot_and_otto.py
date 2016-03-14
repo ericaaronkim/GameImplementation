@@ -89,7 +89,6 @@ class State(object):
         if self.pieces[x,y] != word[char_pos_in_word]:
             return False
         return self.word_test(x+dx, y+dy, word, dx, dy, char_pos_in_word+1)
->>>>>>> origin/optimization
 
 
 #Implementation of the neccessary functions for the solver
