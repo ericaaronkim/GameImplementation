@@ -8,7 +8,8 @@ LOSS, WIN, TIE, DRAW, UNDECIDED = "LOSS", "WIN", "TIE", "DRAW", "UNDECIDED"
 toot = np.array([1,2,2,1])
 otto = np.array([2,1,1,2])
 
-height = 4, length = 6
+height = 4
+length = 6
 
 initial_position = np.zeros((height+1,length), dtype = np.int8)
 # top row is number of T for P1, O for P1, T for P2, O for P3, 
@@ -138,9 +139,6 @@ def do_move(board, action):
 	return board
 
 
-
-
-
 #helpful prints for reference, understanding the code, and debugging
 def example():
 	print 'the initial position is the following:'
@@ -169,6 +167,48 @@ def example():
 	print possible_actions
 	print 'primitive value:'
 	print primitive(board_turn_1)
+
+	board = do_move(board_turn_1, possible_actions[4])
+	print 'this is the state after a move has been made'
+	print_board(board)
+	print 'hand1T=' + str(board[0,0])
+	print 'hand1O=' + str(board[0,1])
+	print 'hand2T=' + str(board[0,2])
+	print 'hand2O=' + str(board[0,3])
+	print 'firstPlayerTurn=' + str(board[0,4]==1)
+	possible_actions = gen_moves(board)
+	print 'New possible actions:'
+	print possible_actions
+	print 'primitive value:'
+	print primitive(board)
+
+	board = do_move(board, possible_actions[4])
+	print 'this is the state after a move has been made'
+	print_board(board)
+	print 'hand1T=' + str(board[0,0])
+	print 'hand1O=' + str(board[0,1])
+	print 'hand2T=' + str(board[0,2])
+	print 'hand2O=' + str(board[0,3])
+	print 'firstPlayerTurn=' + str(board[0,4]==1)
+	possible_actions = gen_moves(board)
+	print 'New possible actions length:'
+	print len(possible_actions)
+	print 'primitive value:'
+	print primitive(board)
+
+	board = do_move(board, possible_actions[4])
+	print 'this is the state after a move has been made'
+	print_board(board)
+	print 'hand1T=' + str(board[0,0])
+	print 'hand1O=' + str(board[0,1])
+	print 'hand2T=' + str(board[0,2])
+	print 'hand2O=' + str(board[0,3])
+	print 'firstPlayerTurn=' + str(board[0,4]==1)
+	possible_actions = gen_moves(board)
+	print 'New possible actions length:'
+	print len(possible_actions)
+	print 'primitive value:'
+	print primitive(board)
 
 
 
