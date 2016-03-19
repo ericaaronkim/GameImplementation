@@ -1,12 +1,11 @@
 from toot_and_otto import *
 
-def tester(state):
-	state.printBoard()
+def tester(board):
+	print_board(board)
 
-	print state.checkForWords()
+	print check_for_words(board)
 
-	print primitive(state)
-
+	print primitive(board)
 
 ###### CASE 1 ######
 ###### 1 toot ######
@@ -17,13 +16,12 @@ def tester(state):
 # [2 1 2 2 2 2]
 # [2 1 1 1 1 1]
 
-s = State()
+initial_position[1] = np.array([1,2,2,1,2,2])
+initial_position[2] = np.array([1,1,1,1,2,2])
+initial_position[3] = np.array([2,1,2,2,2,2])
+initial_position[4] = np.array([2,1,1,1,1,1])
 
-s.pieces[0] = np.array([1,2,2,1,2,2])
-s.pieces[1] = np.array([1,1,1,1,2,2])
-s.pieces[2] = np.array([2,1,2,2,2,2])
-s.pieces[3] = np.array([2,1,1,1,1,1])
-
+tester(initial_position)
 
 ###### CASE 2 ######
 ###### 2 toot ######
@@ -34,13 +32,12 @@ s.pieces[3] = np.array([2,1,1,1,1,1])
 # [2 1 2 2 2 2]
 # [1 1 1 1 1 1]
 
-t = State()
+initial_position[1] = np.array([1,2,2,1,2,2])
+initial_position[2] = np.array([2,1,1,1,2,2])
+initial_position[3] = np.array([2,1,2,2,2,2])
+initial_position[4] = np.array([1,1,1,1,1,1])
 
-t.pieces[0] = np.array([1,2,2,1,2,2])
-t.pieces[1] = np.array([2,1,1,1,2,2])
-t.pieces[2] = np.array([2,1,2,2,2,2])
-t.pieces[3] = np.array([1,1,1,1,1,1])
-
+tester(initial_position)
 
 ###### CASE 3 ######
 ###### 3 toot ######
@@ -51,13 +48,12 @@ t.pieces[3] = np.array([1,1,1,1,1,1])
 # [2 1 2 2 2 2]
 # [1 1 1 1 1 1]
 
-r = State()
+initial_position[1] = np.array([1,2,2,1,2,2])
+initial_position[2] = np.array([2,2,1,1,1,2])
+initial_position[3] = np.array([2,1,2,2,2,2])
+initial_position[4] = np.array([1,1,1,1,1,1])
 
-r.pieces[0] = np.array([1,2,2,1,2,2])
-r.pieces[1] = np.array([2,2,1,1,1,2])
-r.pieces[2] = np.array([2,1,2,2,2,2])
-r.pieces[3] = np.array([1,1,1,1,1,1])
-
+tester(initial_position)
 
 ###### CASE 4 ######
 ###### 3 toot ######
@@ -68,13 +64,12 @@ r.pieces[3] = np.array([1,1,1,1,1,1])
 # [2 1 2 2 2 2]
 # [1 1 1 1 1 2]
 
-u = State()
+initial_position[1] = np.array([1,2,2,1,1,2])
+initial_position[2] = np.array([2,2,1,1,1,2])
+initial_position[3] = np.array([2,1,2,2,2,2])
+initial_position[4] = np.array([1,1,1,1,1,2])
 
-u.pieces[0] = np.array([1,2,2,1,1,2])
-u.pieces[1] = np.array([2,2,1,1,1,2])
-u.pieces[2] = np.array([2,1,2,2,2,2])
-u.pieces[3] = np.array([1,1,1,1,1,2])
-
+tester(initial_position)
 
 ###### CASE 5 ######
 ###### 3 toot ######
@@ -85,37 +80,16 @@ u.pieces[3] = np.array([1,1,1,1,1,2])
 # [2 1 1 2 1 2]
 # [1 1 1 2 2 1]
 
-v = State()
+initial_position[1] = np.array([1,2,2,1,1,2])
+initial_position[2] = np.array([2,2,1,1,2,2])
+initial_position[3] = np.array([2,1,1,2,1,2])
+initial_position[4] = np.array([1,1,1,2,2,1])
 
-v.pieces[0] = np.array([1,2,2,1,1,2])
-v.pieces[1] = np.array([2,2,1,1,2,2])
-v.pieces[2] = np.array([2,1,1,2,1,2])
-v.pieces[3] = np.array([1,1,1,2,2,1])
-
-
-###### partial board ######
-
-# [0 0 0 0 0 0]
-# [0 0 0 0 0 0]
-# [0 0 0 0 0 0]
-# [1 0 0 0 0 0]
-
-# possible moves: (1, (2,0)), (2, (2,0)), (1, (3,1)), (2, (3,2))
-#				  (1, (3,2)), (2, (3,2)), (1, (3,3)), (2, (3,3))
-#				  (1, (3,4)), (2, (3,4)), (1, (3,5)), (2, (3,5))
-
-p = State()
-
-p.pieces[0] = np.array([0,0,0,0,0,0])
-p.pieces[1] = np.array([0,0,0,0,0,0])
-p.pieces[2] = np.array([0,0,0,0,0,0])
-p.pieces[3] = np.array([1,2,2,1,0,0])
-
-
+tester(initial_position)
 
 
 ###### Empty State ######
-w = State()
+###### Testing gen_moves ######
 
 # [0 0 0 0 0 0]
 # [0 0 0 0 0 0]
@@ -126,8 +100,13 @@ w = State()
 #				  (1, (3,2)), (2, (3,2)), (1, (3,3)), (2, (3,3))
 #				  (1, (3,4)), (2, (3,4)), (1, (3,5)), (2, (3,5))
 
+initial_position[1] = np.array([0,0,0,0,0,0])
+initial_position[2] = np.array([0,0,0,0,0,0])
+initial_position[3] = np.array([0,0,0,0,0,0])
+initial_position[4] = np.array([0,0,0,0,0,0])
 
-
+tester(initial_position)
+print gen_moves(initial_position)
 
 
 
